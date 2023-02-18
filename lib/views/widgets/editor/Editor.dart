@@ -155,21 +155,30 @@ class _EditorState extends State<Editor> {
       // chack can error widget to iamge
       if (wgtbytes == null) {
         ScaffoldMessenger.of(context)
-            .showSnackBar(MysnackBar('Sumthing Want Wrong!'));
+            .showSnackBar(MysnackBar('Something Went Wrong!'));
         return false;
       }
       // start work for action
       if (action == 0) {
         // for save file button click
         var time = DateTime.now().millisecondsSinceEpoch;
-        final directory = Directory('/storage/emulated/0/Download');
-        File file2 = File("${directory.path}/Daily_Quotes_$time.jpg");
+        // find download path
+        Future<String?> findLocalPath() async {
+          var directory = await getDownloadsDirectory();
+          return directory!.path;
+        }
+
+        // save on path
+        String? downloadPath = await findLocalPath();
+        File file2 = File("$downloadPath/Daily_Quotes_$time.jpg");
         await file2.writeAsBytes(wgtbytes);
+
         setState(() {
           loading = false;
         });
 
-        ScaffoldMessenger.of(context).showSnackBar(MysnackBar('Image Saved'));
+        ScaffoldMessenger.of(context)
+            .showSnackBar(MysnackBar('Image Saved Downloads Folder'));
       } else {
         // for share button
         final t = await getTemporaryDirectory();
@@ -185,7 +194,7 @@ class _EditorState extends State<Editor> {
         loading = false;
       });
       ScaffoldMessenger.of(context).showSnackBar(
-        MysnackBar('Sumthing Want Wrong : ( '),
+        MysnackBar('Something Went Wrong : ( '),
       );
       print(e);
     }

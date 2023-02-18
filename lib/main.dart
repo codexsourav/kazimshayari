@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:kazimshayari/views/pages/HomePage.dart';
 
 void main() {
