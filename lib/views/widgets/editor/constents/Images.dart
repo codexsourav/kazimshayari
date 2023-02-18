@@ -1,0 +1,17 @@
+List ImagesPath = [
+  'assets/res/img1.jpg',
+  'assets/res/img2.jpg',
+  'assets/res/img3.jpg',
+  'assets/res/img4.jpg',
+  'assets/res/img5.jpg',
+  'assets/res/img6.jpg',
+  'assets/res/img7.jpg',
+  'assets/res/img8.jpg',
+  'assets/res/img9.jpg',
+  'assets/res/img10.jpg',
+  'assets/res/img11.jpg',
+  'assets/res/img12.jpg',
+  'assets/res/img13.jpg',
+  'assets/res/img14.jpg',
+  'assets/res/img15.jpg',
+];
