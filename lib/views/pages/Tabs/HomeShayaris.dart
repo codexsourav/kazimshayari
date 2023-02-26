@@ -15,6 +15,8 @@ class HomeShayaris extends StatefulWidget {
 
 class _HomeShayarisState extends State<HomeShayaris> {
   var savedDb = LocalDb.instense;
+  ScrollController scrollController = ScrollController();
+  int showskip = 10;
 
   int showcathome = 0;
 
@@ -28,12 +30,14 @@ class _HomeShayarisState extends State<HomeShayaris> {
 
   var airtable = AirtableDb.instense;
   List? data;
+  List? showdata;
 
   setData() async {
     try {
       var maindata = await airtable.getQuotes(topmenu[showcathome]);
       setState(() {
         data = maindata['records'];
+        showdata = data!.take(10).toList();
       });
     } catch (e) {
       setState(() {
@@ -56,10 +60,29 @@ class _HomeShayarisState extends State<HomeShayaris> {
     }
   }
 
+// scroll paginatiomn
+  _scrollListener() {
+    scrollController.addListener(
+      () async {
+        if (data != null) {
+          if (scrollController.position.pixels ==
+                  scrollController.position.maxScrollExtent &&
+              data!.length != showdata!.length) {
+            setState(() {
+              showdata = [...showdata!, ...data!.skip(showskip).take(10)];
+              showskip = showskip + 10;
+            });
+          }
+        }
+      },
+    );
+  }
+
   @override
   void initState() {
     super.initState();
     setData();
+    _scrollListener();
   }
 
   onclickbtn(index) async {
@@ -67,6 +90,8 @@ class _HomeShayarisState extends State<HomeShayaris> {
       showcathome = index;
       setState(() {
         data = null;
+        showdata = null;
+        showskip = 10;
       });
     });
     setData();
@@ -74,9 +99,10 @@ class _HomeShayarisState extends State<HomeShayaris> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 15),
-      child: SingleChildScrollView(
+    return SingleChildScrollView(
+      controller: scrollController,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 15),
         child: Column(
           children: [
             Topbar(context,
@@ -85,10 +111,11 @@ class _HomeShayarisState extends State<HomeShayaris> {
             data != null
                 ? Column(
                     children: [
-                      for (var getdata in data!)
+                      for (var getdata in showdata!)
                         ShayariView(
                           quotes: getdata,
-                        )
+                        ),
+                      SizedBox(height: 20),
                     ],
                   )
                 : SizedBox(
@@ -102,6 +129,5 @@ class _HomeShayarisState extends State<HomeShayaris> {
         ),
       ),
     );
-    ;
   }
 }

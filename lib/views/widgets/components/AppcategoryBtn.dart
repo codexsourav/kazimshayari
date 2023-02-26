@@ -6,7 +6,7 @@ Widget AppcategoryBtn(context, {active = false, title = 'Category', onclick}) {
     onTap: onclick,
     child: Container(
       width: (MediaQuery.of(context).size.width / 3) - 20,
-      padding: EdgeInsets.symmetric(horizontal: 4),
+      padding: const EdgeInsets.symmetric(horizontal: 4),
       height: 40,
       decoration: BoxDecoration(
         color: active ? Themecolors.primary : Themecolors.white,
@@ -20,7 +20,7 @@ Widget AppcategoryBtn(context, {active = false, title = 'Category', onclick}) {
           overflow: TextOverflow.clip,
           textAlign: TextAlign.center,
           style: TextStyle(
-            color: active ? Themecolors.graybg : Themecolors.primary,
+            color: active ? Themecolors.white : Themecolors.primary,
             fontWeight: FontWeight.w400,
           ),
         ),

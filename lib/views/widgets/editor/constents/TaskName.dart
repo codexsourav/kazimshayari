@@ -1,10 +1,12 @@
-List tasknames = [
-  'Font Size',
+List<String> tasknames = [
+  'Text Size',
   'Text Color',
   'Text Aline',
   'Font Style',
   'Padding',
   'Background Image',
   'Opacity',
-  'Background Color'
+  'Background Color',
+  'Text Style',
+  'Gradient Color',
 ];

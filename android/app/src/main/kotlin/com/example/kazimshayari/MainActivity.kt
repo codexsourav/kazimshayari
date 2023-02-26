@@ -1,4 +1,4 @@
-package com.example.kazimshayari
+package com.rumi.quotes.daily
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -9,8 +9,8 @@ Widget BackNavOptions({back, task}) {
       children: [
         IconButton(
           onPressed: back,
-          padding: EdgeInsets.all(5),
-          icon: Icon(
+          padding: const EdgeInsets.all(5),
+          icon: const Icon(
             Icons.arrow_back_ios_new_rounded,
             size: 19,
           ),

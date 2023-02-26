@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kazimshayari/constents/themeColors.dart';
-import 'package:kazimshayari/views/widgets/components/AppcategoryBtn.dart';
+
+import 'package:kazimshayari/views/widgets/editor/component/actionBtn.dart';
 
 Widget FinalButton(context, {onclick, loading}) {
   return Padding(
@@ -10,10 +11,16 @@ Widget FinalButton(context, {onclick, loading}) {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              AppcategoryBtn(context,
-                  title: 'Save', active: true, onclick: () => onclick(0)),
-              AppcategoryBtn(context,
-                  title: 'Share', active: true, onclick: () => onclick(1)),
+              actionBtn(
+                  width: MediaQuery.of(context).size.width / 2 - 70,
+                  text: 'Save',
+                  onclick: () => onclick(0),
+                  icon: Icons.save),
+              actionBtn(
+                  width: MediaQuery.of(context).size.width / 2 - 70,
+                  text: 'Share',
+                  onclick: () => onclick(1),
+                  icon: Icons.share),
             ],
           )
         : CircularProgressIndicator(

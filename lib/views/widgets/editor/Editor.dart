@@ -1,13 +1,15 @@
 import 'dart:io';
-
+import 'package:file_picker/file_picker.dart';
+import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:kazimshayari/constents/GredentColors.dart';
+import 'package:kazimshayari/constents/themeColors.dart';
 import 'package:kazimshayari/views/widgets/alerts/Mysnakbar.dart';
+import 'package:kazimshayari/views/widgets/editor/actions/setBgGredentColor.dart';
 import 'package:kazimshayari/views/widgets/editor/component/FinalButtons.dart';
 import 'package:kazimshayari/views/widgets/editor/constents/Alines.dart';
-
 import 'package:kazimshayari/views/widgets/editor/ViewPage.dart';
 import 'package:kazimshayari/views/widgets/editor/actions/Setbgcolor.dart';
-import 'package:kazimshayari/views/widgets/editor/actions/Setbgimg.dart';
 import 'package:kazimshayari/views/widgets/editor/actions/Setfonts.dart';
 import 'package:kazimshayari/views/widgets/editor/actions/Setopacity.dart';
 import 'package:kazimshayari/views/widgets/editor/actions/Setpadding.dart';
@@ -16,6 +18,7 @@ import 'package:kazimshayari/views/widgets/editor/actions/Textcolor.dart';
 import 'package:kazimshayari/views/widgets/editor/actions/Textsize.dart';
 import 'package:kazimshayari/views/widgets/editor/component/BackNavOptions.dart';
 import 'package:kazimshayari/views/widgets/editor/component/ButtonsMenu.dart';
+import 'package:kazimshayari/views/widgets/editor/constents/Fonts.dart';
 import 'package:kazimshayari/views/widgets/editor/constents/TaskName.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:widgets_to_image/widgets_to_image.dart';
@@ -34,13 +37,18 @@ class _EditorState extends State<Editor> {
   int? optionindex;
   String shayari = '';
   double textFontsize = 22;
-  Color textcolor = Color.fromARGB(255, 255, 255, 255);
+  Color textcolor = const Color.fromARGB(255, 255, 255, 255);
   int textalineinex = 0;
-  int fontindex = 0;
+  int? fontindex = null;
   double textpadding = 10;
-  double opcity = 0.5;
-  Color bgcolor = Color.fromARGB(255, 0, 0, 0);
-  int bgimgindex = 2;
+  double opcity = 1;
+  Color bgcolor = Themecolors.primary;
+  int textstyleindex = 0;
+  List<Color>? gradientColors;
+  Color gcolor1 = Themecolors.primary;
+  Color gcolor2 = Themecolors.primary;
+
+  var bgimgibyts = null;
   bool loading = false;
 
   WidgetsToImageController wtoimgcontroller = WidgetsToImageController();
@@ -49,20 +57,54 @@ class _EditorState extends State<Editor> {
 
   setOptinindex(index) {
     if (index == 2) {
-      if (textalineinex != textAline.length - 1) {
-        setState(() {
-          textalineinex++;
-        });
+      settextAline();
+      return false;
+    } else if (index == 5) {
+      setBgimage();
+      return false;
+    } else if (index == 6) {
+      if (bgimgibyts == null) {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(MysnackBar('Select A Image To Use Opacity'));
       } else {
         setState(() {
-          textalineinex = 0;
+          optionindex = index;
         });
       }
+    } else if (index == 8) {
+      settextstyleindex();
       return false;
+    } else {
+      setState(() {
+        optionindex = index;
+      });
     }
-    setState(() {
-      optionindex = index;
-    });
+  }
+
+// set text aline
+  settextAline() {
+    if (textalineinex != textAline.length - 1) {
+      setState(() {
+        textalineinex++;
+      });
+    } else {
+      setState(() {
+        textalineinex = 0;
+      });
+    }
+  }
+
+  // set text style inxex
+  settextstyleindex() {
+    if (textstyleindex != fontsDataName.length - 1) {
+      setState(() {
+        textstyleindex++;
+      });
+    } else {
+      setState(() {
+        textstyleindex = 0;
+      });
+    }
   }
 
 // on back btn click
@@ -110,16 +152,44 @@ class _EditorState extends State<Editor> {
 
   // set bg color
   setBgcolor(color) {
+    if (gradientColors != null) {
+      setState(() {
+        gradientColors = null;
+      });
+    }
     setState(() {
       bgcolor = color;
     });
   }
 
   // set bg image
-  setBgimage(index) {
-    setState(() {
-      bgimgindex = index;
-    });
+  setBgimage() async {
+    if (bgimgibyts == null) {
+      try {
+        FilePickerResult? result = await FilePicker.platform.pickFiles(
+          type: FileType.custom,
+          allowedExtensions: ['jpg', 'jpeg', 'png'],
+        );
+        if (result != null) {
+          if (result.files.first.path != null) {
+            setState(() {
+              bgimgibyts = result.files.first.path;
+              opcity = 0;
+            });
+          }
+        }
+      } catch (e) {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(MysnackBar('Something Went Wrong!'));
+        return false;
+      }
+    } else {
+      // remove imgr
+      setState(() {
+        bgimgibyts = null;
+        opcity = 1;
+      });
+    }
   }
 
   // onedit text
@@ -139,6 +209,56 @@ class _EditorState extends State<Editor> {
     setState(() {
       shayari = text;
     });
+  }
+
+// select gredent color
+  selectGredentColors(index) {
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          insetPadding:
+              const EdgeInsets.symmetric(vertical: 100, horizontal: 10),
+          shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(10.0))),
+          title:
+              Text(index == 0 ? "Select First Color" : "Select Secend Color"),
+          content: ColorPicker(
+            padding: EdgeInsets.all(0),
+            pickersEnabled: const {
+              ColorPickerType.both: false,
+              ColorPickerType.wheel: true,
+              ColorPickerType.accent: false,
+            },
+            color: Colors.red,
+            onColorChanged: (value) {
+              if (index == 0) {
+                setState(() {
+                  gcolor1 = value;
+                  gradientColors = [gcolor1, gcolor2];
+                });
+              } else {
+                setState(() {
+                  gcolor2 = value;
+                  gradientColors = [gcolor1, gcolor2];
+                });
+              }
+            },
+          ),
+          actions: [
+            TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text(
+                  "Ok",
+                  style: TextStyle(color: Themecolors.primary),
+                ))
+          ],
+        );
+      },
+    );
   }
 
 // final save or share
@@ -164,8 +284,20 @@ class _EditorState extends State<Editor> {
         var time = DateTime.now().millisecondsSinceEpoch;
         // find download path
         Future<String?> findLocalPath() async {
-          var directory = await getDownloadsDirectory();
-          return directory!.path;
+          if (Platform.isAndroid) {
+            var directory = "/storage/emulated/0/Download/";
+            var dirDownloadExists = await Directory(directory).exists();
+            if (dirDownloadExists) {
+              directory = "/storage/emulated/0/Download/";
+            } else {
+              directory = "/storage/emulated/0/Downloads/";
+            }
+
+            return directory;
+          } else {
+            var directory = await getDownloadsDirectory();
+            return directory!.path;
+          }
         }
 
         // save on path
@@ -196,7 +328,6 @@ class _EditorState extends State<Editor> {
       ScaffoldMessenger.of(context).showSnackBar(
         MysnackBar('Something Went Wrong : ( '),
       );
-      print(e);
     }
   }
 
@@ -220,9 +351,12 @@ class _EditorState extends State<Editor> {
       const SizedBox(),
       setFonts(ontap: setfontStyle),
       SetPadding(onchenge: setpadding, size: textpadding),
-      setBgImg(ontap: setBgimage),
+      const SizedBox(),
       SetOpacity(onchenge: setOpacity, size: opcity),
       BgColorSet(color: bgcolor, onchenge: setBgcolor),
+      const SizedBox(),
+      setBgGredentColor(context,
+          colors: gradientColors, setcolor: selectGredentColors),
     ];
 
     // return page
@@ -238,17 +372,22 @@ class _EditorState extends State<Editor> {
             text: shayari,
             fontindex: fontindex,
             padding: textpadding,
-            bgimgindex: bgimgindex,
             opacity: opcity,
             bgcolor: bgcolor,
             controller: wtoimgcontroller,
+            fontStyle: textstyleindex,
+            gredintcolors: gradientColors,
+            bytes: bgimgibyts,
           ),
         ),
         optionindex != null
             ? Align(
                 alignment: Alignment.topLeft,
                 child: BackNavOptions(
-                    back: backToOptions, task: tasknames[optionindex!]))
+                  back: backToOptions,
+                  task: tasknames[optionindex!],
+                ),
+              )
             : const SizedBox(height: 15),
         Expanded(
           child: SingleChildScrollView(
@@ -257,7 +396,12 @@ class _EditorState extends State<Editor> {
                 optionindex == null
                     ? Column(
                         children: [
-                          buttonMenu(onclick: setOptinindex),
+                          buttonMenu(
+                            onclick: setOptinindex,
+                            alineicon: textAlineIcon[textalineinex],
+                            fontstyleicon: textStyleIcon[textstyleindex],
+                            isbgimageadd: bgimgibyts == null,
+                          ),
                           FinalButton(
                             context,
                             onclick: savaAndShare,

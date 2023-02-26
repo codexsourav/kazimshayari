@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:kazimshayari/constents/Links.dart';
 import 'package:kazimshayari/constents/themeColors.dart';
 import 'package:kazimshayari/views/pages/AllCategorys.dart';
 import 'package:kazimshayari/views/pages/EditorPage.dart';
@@ -18,15 +19,15 @@ Drawer AppDrawer(context, {tabindex, onclick}) {
             style: TextStyle(fontSize: 10),
           ),
           accountEmail: const Text(
-            'Daily Quotes',
+            'Rumi - Quotes daily',
             style: TextStyle(fontSize: 20),
           ),
           currentAccountPicture: CircleAvatar(
             backgroundColor: Colors.white,
             child: Image.asset(
-              'assets/images/icon.png',
-              width: 30,
-              height: 30,
+              'assets/images/applogo.png',
+              width: 40,
+              height: 40,
             ),
           ),
         ),
@@ -63,7 +64,7 @@ Drawer AppDrawer(context, {tabindex, onclick}) {
             Navigator.of(context).pop();
             Navigator.of(context).push(
               MaterialPageRoute(
-                builder: (context) => AllCategorys(),
+                builder: (context) => const AllCategorys(),
               ),
             );
           },
@@ -106,6 +107,53 @@ Drawer AppDrawer(context, {tabindex, onclick}) {
             onclick(3);
           },
         ),
+        // about us page
+        ListTile(
+          leading: const Icon(
+            FontAwesomeIcons.person,
+            size: 18,
+          ),
+          title: const Text('About Us'),
+          trailing: const Icon(
+            Icons.arrow_forward_ios_rounded,
+            size: 15,
+          ),
+          onTap: () async {
+            final Uri url0 = Uri.parse(aboutus);
+            await launchUrl(url0, mode: LaunchMode.externalApplication);
+          },
+        ),
+        // privacy policy page
+        ListTile(
+          leading: const Icon(
+            FontAwesomeIcons.shield,
+            size: 18,
+          ),
+          title: const Text('Privacy Policy'),
+          trailing: const Icon(
+            Icons.arrow_forward_ios_rounded,
+            size: 15,
+          ),
+          onTap: () async {
+            final Uri url0 = Uri.parse(privacypolicy);
+            await launchUrl(url0, mode: LaunchMode.externalApplication);
+          },
+        ),
+        ListTile(
+          leading: const Icon(
+            FontAwesomeIcons.phone,
+            size: 18,
+          ),
+          title: const Text('Contact Us'),
+          trailing: const Icon(
+            Icons.arrow_forward_ios_rounded,
+            size: 15,
+          ),
+          onTap: () async {
+            final Uri url0 = Uri.parse(contactus);
+            await launchUrl(url0, mode: LaunchMode.externalApplication);
+          },
+        ),
         Expanded(
           child: Align(
             alignment: Alignment.bottomCenter,
@@ -115,14 +163,13 @@ Drawer AppDrawer(context, {tabindex, onclick}) {
                 color: Colors.pink,
                 size: 18,
               ),
-              title: const Text('Follow Me Instagram'),
+              title: const Text('Follow & DM Your Quotes'),
               trailing: const Icon(
                 Icons.arrow_forward_ios_rounded,
                 size: 15,
               ),
               onTap: () async {
-                const url = "https://www.instagram.com/codexsourav";
-                final Uri url0 = Uri.parse(url);
+                final Uri url0 = Uri.parse(instagram);
                 await launchUrl(url0, mode: LaunchMode.externalApplication);
               },
             ),

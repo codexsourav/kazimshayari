@@ -64,9 +64,9 @@ class _CatViewState extends State<CatView> {
               padding: EdgeInsets.symmetric(horizontal: 15),
               itemCount: data!.length,
               itemBuilder: (BuildContext context, int index) {
-                var Quotes = data![index];
+                var quotes = data![index];
 
-                return ShayariView(quotes: Quotes);
+                return ShayariView(quotes: quotes);
               },
             )
           : Center(

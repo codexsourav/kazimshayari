@@ -12,7 +12,7 @@ Widget CategoryBtn(context, text) {
       );
     },
     child: Container(
-      margin: EdgeInsets.all(5),
+      margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       decoration: BoxDecoration(
         color: Colors.black,
         borderRadius: BorderRadius.circular(
@@ -26,9 +26,9 @@ Widget CategoryBtn(context, text) {
           maxLines: 1,
           textAlign: TextAlign.center,
           overflow: TextOverflow.clip,
-          style: TextStyle(
+          style: const TextStyle(
             color: Colors.white,
-            fontSize: 14,
+            fontSize: 17,
             fontWeight: FontWeight.bold,
           ),
         ),

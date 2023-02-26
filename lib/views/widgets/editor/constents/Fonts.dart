@@ -1,5 +1,6 @@
+import 'package:flutter/material.dart';
+
 List AppFonts = [
-  "explore_magic",
   "foundland",
   "handwriting_uwu",
   "hello_christmas_6",
@@ -10,8 +11,20 @@ List AppFonts = [
   "nice_chalk",
   "peachy",
   "resistant",
-  "skinny_dream",
-  "sophiaticha",
-  "tweet_lesson",
-  "vanilla_caramel"
+];
+
+// text font style icon
+
+List textStyleIcon = [
+  Icons.text_format_rounded,
+  Icons.format_italic_rounded,
+  Icons.format_bold_rounded,
+];
+
+// FontStyle name
+
+List fontsDataName = [
+  FontStyle.normal,
+  FontStyle.italic,
+  FontWeight.bold,
 ];

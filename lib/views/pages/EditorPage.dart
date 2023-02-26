@@ -9,10 +9,11 @@ class EditorPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Themecolors.graybg,
       appBar: AppBar(
         elevation: 0.0,
         backgroundColor: Themecolors.primary,
-        title: Text('Create Design'),
+        title: const Text('Create Design'),
         centerTitle: true,
       ),
       body: Editor(shayari: shayari),

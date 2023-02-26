@@ -4,7 +4,7 @@ import 'package:kazimshayari/views/widgets/components/AppcategoryBtn.dart';
 
 Widget Topbar(context, {onclick, index, datanames}) {
   return Container(
-    margin: EdgeInsets.only(top: 10),
+    margin: const EdgeInsets.only(top: 10),
     child: Column(
       children: [
         Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
@@ -27,7 +27,7 @@ Widget Topbar(context, {onclick, index, datanames}) {
             onclick: () => onclick(2),
           ),
         ]),
-        SizedBox(height: 10),
+        const SizedBox(height: 10),
         Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
           AppcategoryBtn(
             context,
@@ -48,7 +48,7 @@ Widget Topbar(context, {onclick, index, datanames}) {
             onclick: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) => AllCategorys(),
+                  builder: (context) => const AllCategorys(),
                 ),
               );
             },

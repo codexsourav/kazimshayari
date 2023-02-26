@@ -18,7 +18,7 @@ class AllCategorys extends StatelessWidget {
           style: TextStyle(fontWeight: FontWeight.w400),
         ),
       ),
-      body: ShowCategory(),
+      body: const ShowCategory(),
     );
   }
 }

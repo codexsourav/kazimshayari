@@ -68,38 +68,52 @@ class _ShayariViewState extends State<ShayariView> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: 20, bottom: 10),
+      margin: const EdgeInsets.only(top: 20, bottom: 0),
       width: MediaQuery.of(context).size.width - 15,
+      height: 240,
       decoration: BoxDecoration(
-          color: Themecolors.white, borderRadius: BorderRadius.circular(10)),
+        color: Themecolors.white,
+        borderRadius: BorderRadius.circular(10),
+      ),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Container(
-            padding: EdgeInsets.only(top: 20, left: 25, bottom: 10),
+            padding: const EdgeInsets.only(top: 12, left: 15, bottom: 10),
             alignment: Alignment.topLeft,
             child: Image.asset(
               'assets/images/quotation.png',
-              width: 25.0,
-              height: 19.4277,
+              width: 20.0,
+              height: 17.4277,
             ),
           ),
           Center(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-              child: Text(
-                '$text',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Themecolors.primary,
-                  fontSize: 16,
+              padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => EditorPage(shayari: text),
+                  ));
+                },
+                child: Text(
+                  '$text',
+                  maxLines: 5,
+                  overflow: TextOverflow.ellipsis,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Themecolors.textcolor,
+                    fontSize: 18.5,
+                  ),
                 ),
               ),
             ),
           ),
           Container(
-            height: 60,
+            height: 45,
+            alignment: Alignment.bottomCenter,
             width: MediaQuery.of(context).size.width - 30,
-            padding: EdgeInsets.symmetric(horizontal: 15),
+            padding: const EdgeInsets.symmetric(horizontal: 15),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -112,9 +126,9 @@ class _ShayariViewState extends State<ShayariView> {
                       'assets/images/icon.png',
                       width: 20,
                     ),
-                    SizedBox(width: 8),
+                    const SizedBox(width: 8),
                     Text(
-                      '$username',
+                      username,
                       style: TextStyle(
                         color: Themecolors.primary,
                         fontSize: 12,
@@ -134,14 +148,14 @@ class _ShayariViewState extends State<ShayariView> {
                           builder: (context) => EditorPage(shayari: text),
                         ));
                       },
-                      color: Themecolors.primary,
-                      icon: Icon(Icons.edit_note_rounded, size: 22),
+                      color: Themecolors.primary.withOpacity(0.7),
+                      icon: const Icon(Icons.edit_note_rounded, size: 22),
                     ),
                     IconButton(
                       onPressed: () {
                         addremoveFav(widget.quotes['id']);
                       },
-                      color: Themecolors.primary,
+                      color: Themecolors.primary.withOpacity(0.7),
                       icon: Icon(
                         isfav
                             ? FontAwesomeIcons.solidHeart
@@ -153,8 +167,8 @@ class _ShayariViewState extends State<ShayariView> {
                       onPressed: () {
                         Share.share(text);
                       },
-                      color: Themecolors.primary,
-                      icon: Icon(
+                      color: Themecolors.primary.withOpacity(0.7),
+                      icon: const Icon(
                         Icons.share,
                         size: 22,
                       ),

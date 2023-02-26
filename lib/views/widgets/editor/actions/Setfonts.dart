@@ -13,7 +13,8 @@ Widget setFonts({ontap}) {
               child: Container(
                 color: Colors.transparent,
                 width: double.infinity,
-                padding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
                 child: Text(
                   AppFonts[index].toString(),
                   textAlign: TextAlign.center,

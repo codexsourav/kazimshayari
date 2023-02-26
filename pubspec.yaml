@@ -39,10 +39,12 @@ dependencies:
   http: ^0.13.5
   localstorage: ^4.0.0+1
   share_plus: ^6.3.1
-  flutter_colorpicker: ^1.0.3
+  flex_color_picker: ^3.1.0
   widgets_to_image: ^0.0.2
   path_provider: ^2.0.12
   url_launcher: ^6.1.9
+  file_picker: ^5.2.5
+  onesignal_flutter: ^3.5.0
 
 dev_dependencies:
   flutter_test:
@@ -69,13 +71,6 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/
-    - assets/res/
-
-  # An image asset can refer to one or more resolution-specific "variants", see
-  # https://flutter.dev/assets-and-images/#resolution-aware
-
-  # For details regarding adding assets from package dependencies, see
-  # https://flutter.dev/assets-and-images/#from-packages
 
   # To add custom fonts to your application, add a fonts section here,
   # in this "flutter" section. Each entry in this list should have a
@@ -83,66 +78,45 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: explore_magic
-      fonts:
-        - asset: fonts/explore_magic/Explore Magic.otf
-
     - family: foundland
       fonts:
-        - asset: fonts/foundland/Foundland_PERSONAL_USE_ONLY.otf
+        - asset: fonts/font_1.ttf
 
     - family: handwriting_uwu
       fonts:
-        - asset: fonts/handwriting_uwu/HandwritingUwuByMonicaartie-Regular.ttf
+        - asset: fonts/font_2.ttf
 
     - family: hello_christmas_6
       fonts:
-        - asset: fonts/hello_christmas_6/Hello Christmas.otf
+        - asset: fonts/font_3.ttf
 
     - family: kamehaya_bintang
       fonts:
-        - asset: fonts/kamehaya_bintang/Kamehaya Bintang.ttf
+        - asset: fonts/font_4.ttf
 
     - family: kattalyna
       fonts:
-        - asset: fonts/kattalyna/Kattalyna.ttf
+        - asset: fonts/font_5.ttf
 
     - family: magicpearl
       fonts:
-        - asset: fonts/magicpearl/Magicpearl Regular.ttf
+        - asset: fonts/font_6.ttf
 
     - family: midspicy
       fonts:
-        - asset: fonts/midspicy/Midspicy Regular.ttf
+        - asset: fonts/font_7.ttf
 
     - family: nice_chalk
       fonts:
-        - asset: fonts/nice_chalk/Nice Chalk Demo.ttf
+        - asset: fonts/font_8.ttf
 
     - family: peachy
       fonts:
-        - asset: fonts/peachy/Peachy.ttf
+        - asset: fonts/font_9.ttf
 
     - family: resistant
       fonts:
-        - asset: fonts/resistant/Resistant.ttf
-
-    - family: skinny_dream
-      fonts:
-        - asset: fonts/skinny_dream/SkinnyDream-Regular.ttf
-
-    - family: sophiaticha
-      fonts:
-        - asset: fonts/sophiaticha/Sophiaticha.ttf
-
-    - family: tweet_lesson
-      fonts:
-        - asset: fonts/tweet_lesson/Tweet Lesson.ttf
-
-    - family: vanilla_caramel
-      fonts:
-        - asset: fonts/vanilla_caramel/Vanilla Caramel.otf
-
+        - asset: fonts/font_10.ttf
 
 
 

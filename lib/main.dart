@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Daily Quotes',
+      title: 'Rumi - Quotes daily',
       debugShowCheckedModeBanner: false,
       showPerformanceOverlay: false,
       theme: ThemeData(

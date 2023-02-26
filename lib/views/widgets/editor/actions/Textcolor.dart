@@ -1,5 +1,5 @@
+import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 
 Widget TextColorSet({onchenge, color}) {
   return Column(
@@ -7,9 +7,12 @@ Widget TextColorSet({onchenge, color}) {
       Padding(
         padding: const EdgeInsets.only(bottom: 40),
         child: ColorPicker(
-          pickerColor: color,
-          portraitOnly: true,
-          showLabel: false,
+          pickersEnabled: {
+            ColorPickerType.both: false,
+            ColorPickerType.wheel: true,
+            ColorPickerType.accent: false,
+          },
+          color: color,
           onColorChanged: (value) => onchenge(value),
         ),
       ),

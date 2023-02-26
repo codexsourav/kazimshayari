@@ -7,33 +7,48 @@ Widget TextEditor({text, onsave}) {
   return Dialog(
     elevation: 0.0,
     child: Container(
-      height: 220.0,
-      width: 360.0,
-      color: Colors.white,
+      height: 280.0,
+      width: 380.0,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(10),
+      ),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.all(20.0),
+          Text(
+            'Edit Quote',
+            style: TextStyle(
+              color: Themecolors.primary,
+              fontWeight: FontWeight.bold,
+              fontSize: 19,
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.symmetric(horizontal: 15),
+            padding: EdgeInsets.all(10),
+            color: Color.fromARGB(255, 235, 235, 235),
             child: TextField(
               controller: textEditingController,
               cursorColor: Themecolors.primary,
               keyboardType: TextInputType.multiline,
-              maxLines: 5,
-              decoration: const InputDecoration.collapsed(
-                hintText: 'Edit Text',
-              ),
+              maxLines: 6,
+              decoration: const InputDecoration.collapsed(hintText: ''),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(15.0),
-            child: TextButton(
-              onPressed: () {
-                onsave(textEditingController.text);
-              },
+          GestureDetector(
+            onTap: () {
+              onsave(textEditingController.text);
+            },
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+              decoration: BoxDecoration(
+                color: Themecolors.primary,
+                borderRadius: BorderRadius.circular(10),
+              ),
               child: Text(
-                'SAVE',
-                style: TextStyle(color: Themecolors.primary),
+                'Update Quote',
+                style: TextStyle(color: Themecolors.white),
               ),
             ),
           ),

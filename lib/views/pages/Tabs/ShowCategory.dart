@@ -28,7 +28,7 @@ class _ShowCategoryState extends State<ShowCategory> {
       });
 
       // show alerts
-      print(e);
+
       ScaffoldMessenger.of(context).hideCurrentSnackBar();
       if (e.toString() == "Failed host lookup: 'api.airtable.com'") {
         ScaffoldMessenger.of(context)
@@ -55,7 +55,7 @@ class _ShowCategoryState extends State<ShowCategory> {
       return GridView.builder(
         itemCount: data!.length,
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          childAspectRatio: (1 / .35),
+          childAspectRatio: (1 / .46),
           crossAxisCount: 2,
         ),
         itemBuilder: (BuildContext context, int index) {

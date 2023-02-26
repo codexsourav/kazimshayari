@@ -1,8 +1,9 @@
 import 'dart:ui';
 
 class Themecolors {
-  static Color primary = Color.fromARGB(255, 54, 63, 94);
-  static Color secendery = Color.fromARGB(255, 116, 116, 116);
-  static Color white = Color.fromARGB(255, 255, 255, 255);
-  static Color graybg = Color.fromARGB(255, 245, 245, 245);
+  static Color primary = const Color.fromARGB(255, 54, 63, 94);
+  static Color textcolor = const Color.fromARGB(255, 54, 63, 94);
+  static Color secendery = const Color.fromARGB(255, 116, 116, 116);
+  static Color white = const Color.fromARGB(255, 255, 255, 255);
+  static Color graybg = const Color.fromARGB(255, 228, 228, 228);
 }

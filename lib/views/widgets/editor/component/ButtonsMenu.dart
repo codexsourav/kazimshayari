@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:kazimshayari/views/widgets/editor/component/Option.dart';
 
-Widget buttonMenu({onclick}) {
+Widget buttonMenu({onclick, alineicon, fontstyleicon, isbgimageadd = true}) {
   return GridView.count(
-      crossAxisCount: 4,
+      crossAxisCount: 5,
       physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
-      mainAxisSpacing: 20,
-      crossAxisSpacing: 20,
-      padding: EdgeInsets.all(20),
+      mainAxisSpacing: 10,
+      crossAxisSpacing: 10,
+      padding: const EdgeInsets.all(15),
       children: [
         Options(
           icon: Icons.format_size_sharp,
-          text: 'Font Size',
+          text: 'Text Size',
           index: 0,
           onclick: onclick,
         ),
@@ -23,7 +23,7 @@ Widget buttonMenu({onclick}) {
           onclick: onclick,
         ),
         Options(
-          icon: Icons.format_align_center_rounded,
+          icon: alineicon,
           text: "Text Aline",
           index: 2,
           onclick: onclick,
@@ -41,8 +41,8 @@ Widget buttonMenu({onclick}) {
           onclick: onclick,
         ),
         Options(
-          icon: Icons.image,
-          text: "Image",
+          icon: isbgimageadd ? Icons.image : Icons.image_not_supported_rounded,
+          text: isbgimageadd ? "Add Image" : "Remove",
           index: 5,
           onclick: onclick,
         ),
@@ -56,6 +56,18 @@ Widget buttonMenu({onclick}) {
           icon: Icons.colorize_sharp,
           text: "Bg Color",
           index: 7,
+          onclick: onclick,
+        ),
+        Options(
+          icon: fontstyleicon,
+          text: "Text Style",
+          index: 8,
+          onclick: onclick,
+        ),
+        Options(
+          icon: Icons.format_color_fill_rounded,
+          text: "Gradient",
+          index: 9,
           onclick: onclick,
         ),
       ]);
